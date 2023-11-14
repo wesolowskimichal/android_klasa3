@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">michal_wesolowski_timer</string>
+    <string name="default_clock_value">0</string>
+    <string name="separator">:</string>
+    <string name="add_10">+10</string>
+    <string name="minus_10">-10</string>
+    <string name="add_1">+1</string>
+    <string name="minus_1">-1</string>
+    <string name="start">START</string>
+    <string name="stop">STOP</string>
+    <string name="reset">RESET</string>
+</resources>
