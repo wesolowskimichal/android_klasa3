@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/localNotesFragment"
+        android:title="@string/notes_bottom_nav_bar"
+        android:icon="@drawable/ic_notes"/>
+
+    <item android:id="@+id/savedNotesFragment"
+        android:title="@string/favourite_notes_bottom_nav_bar"
+        android:icon="@drawable/ic_saved_notes" />
+
+    <item android:id="@+id/searchNoteFragment"
+        android:title="@string/search_note_bottom_nav_bar"
+        android:icon="@drawable/ic_search" />
+</menu>
