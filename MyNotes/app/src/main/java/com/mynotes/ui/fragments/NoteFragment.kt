@@ -3,6 +3,8 @@ package com.mynotes.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mynotes.R
 import com.mynotes.ui.MainActivity
 import com.mynotes.ui.NotesViewModel

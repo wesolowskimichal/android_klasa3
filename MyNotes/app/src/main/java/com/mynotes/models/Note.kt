@@ -11,5 +11,6 @@ data class Note (
     var id: Int? = null,
     val title: String,
     val content: String,
-    val modificationDate: String
+    val modificationDate: String,
+    val isFavorited: Boolean
 )
