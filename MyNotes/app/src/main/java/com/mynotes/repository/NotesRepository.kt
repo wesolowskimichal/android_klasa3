@@ -3,6 +3,8 @@ package com.mynotes.repository
 import androidx.lifecycle.LiveData
 import com.mynotes.db.NoteDatabase
 import com.mynotes.models.Note
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class NotesRepository(
     val db: NoteDatabase
@@ -11,8 +13,9 @@ class NotesRepository(
 
     suspend fun updateIsFavorited(noteId: Int, isFavorited: Boolean) = db.getNoteDao().updateIsFavorited(noteId, isFavorited)
 
-    suspend fun searchNotesByTitle(searchTitle: String) = db.getNoteDao().searchNotesByTitle(searchTitle)
-
+    suspend fun searchNotesByTitle(searchTitle: String) = withContext(Dispatchers.IO) {
+        db.getNoteDao().searchNotesByTitle(searchTitle)
+    }
 
     fun getSavedNotes() = db.getNoteDao().getAllNotes()
 

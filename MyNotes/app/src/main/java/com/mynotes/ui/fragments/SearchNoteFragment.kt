@@ -26,7 +26,11 @@ class SearchNoteFragment: Fragment(R.layout.fragment_search_notes) {
 
         val etSearch = view.findViewById<EditText>(R.id.etSearch)
         etSearch.addTextChangedListener {
-            viewModel.searchNotesByTitle(it.toString())
+            it?.let {
+                if(it.toString().isNotEmpty()) {
+                    viewModel.searchNotesByTitle(it.toString())
+                }
+            }
         }
 
         viewModel.searchNotes.observe(viewLifecycleOwner, Observer { notesList ->

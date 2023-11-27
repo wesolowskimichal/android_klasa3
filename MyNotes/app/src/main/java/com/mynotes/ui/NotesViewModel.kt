@@ -23,7 +23,9 @@ class NotesViewModel(
         notesRepository.updateIsFavorited(noteId, isFavorited)
     }
     fun searchNotesByTitle(searchTitle: String) = viewModelScope.launch {
-        _searchNotes.postValue(notesRepository.searchNotesByTitle(searchTitle).value)
+        val resposne = notesRepository.searchNotesByTitle(searchTitle)
+        _searchNotes.postValue(resposne)
+
     }
     fun getSavedNotes() = notesRepository.getSavedNotes()
     fun getFavoritedNotes() = notesRepository.getFavoritedNotes()

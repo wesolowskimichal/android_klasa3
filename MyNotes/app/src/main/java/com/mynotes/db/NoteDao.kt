@@ -20,7 +20,7 @@ interface NoteDao {
     fun getAllNotes(): LiveData<List<Note>>
 
     @Query("SELECT * FROM notes WHERE title LIKE '%' || :searchTitle || '%'")
-    fun searchNotesByTitle(searchTitle: String): LiveData<List<Note>>
+    fun searchNotesByTitle(searchTitle: String): List<Note>
 
     @Query("SELECT * FROM notes where isFavorited = 1")
     fun getFavoritedNotes(): LiveData<List<Note>>
