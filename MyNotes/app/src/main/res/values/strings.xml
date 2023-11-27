@@ -3,4 +3,5 @@
     <string name="favourite_notes_bottom_nav_bar">Favourite Notes</string>
     <string name="notes_bottom_nav_bar">Notes</string>
     <string name="search_note_bottom_nav_bar">Search Note</string>
+    <string name="save_note_button">Save</string>
 </resources>

@@ -31,5 +31,9 @@
     <fragment
         android:id="@+id/noteFragment"
         android:name="com.mynotes.ui.fragments.NoteFragment"
-        android:label="NoteFragment" />
+        android:label="NoteFragment" >
+        <argument
+            android:name="note"
+            app:argType="com.mynotes.models.Note" />
+    </fragment>
 </navigation>

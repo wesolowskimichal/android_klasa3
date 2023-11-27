@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mynotes.R
@@ -20,6 +21,17 @@ class SavedNotesFragment: Fragment(R.layout.fragment_saved_notes) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
         initRecycleView()
+
+        notesAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("note", it)
+            }
+
+            findNavController().navigate(
+                R.id.action_savedNotesFragment_to_noteFragment,
+                bundle
+            )
+        }
 
         viewModel.getFavoritedNotes().observe(viewLifecycleOwner, Observer {notesList ->
             notesAdapter.differ.submitList(notesList)
