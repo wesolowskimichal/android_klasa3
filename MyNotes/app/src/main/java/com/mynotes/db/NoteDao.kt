@@ -25,6 +25,9 @@ interface NoteDao {
     @Query("SELECT * FROM notes where isFavorited = 1")
     fun getFavoritedNotes(): LiveData<List<Note>>
 
+    @Query("SELECT isFavorited from notes where id = :noteID")
+    fun getIsFavoritedFromNoteById(noteID: Int): LiveData<Boolean>
+
     @Delete
     fun deleteNote(note: Note)
 }

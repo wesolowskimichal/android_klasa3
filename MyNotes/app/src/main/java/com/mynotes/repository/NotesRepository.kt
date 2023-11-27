@@ -9,7 +9,9 @@ import kotlinx.coroutines.withContext
 class NotesRepository(
     val db: NoteDatabase
 ) {
-    suspend fun upsert(note: Note) = db.getNoteDao().upsert(note)
+    suspend fun upsert(note: Note): Long {
+        return db.getNoteDao().upsert(note)
+    }
 
     suspend fun updateIsFavorited(noteId: Int, isFavorited: Boolean) = db.getNoteDao().updateIsFavorited(noteId, isFavorited)
 
@@ -17,8 +19,13 @@ class NotesRepository(
         db.getNoteDao().searchNotesByTitle(searchTitle)
     }
 
+    fun getIsFavoritedFromNoteById(noteID: Int) = db.getNoteDao().getIsFavoritedFromNoteById(noteID)
+
+
     fun getSavedNotes() = db.getNoteDao().getAllNotes()
 
     fun getFavoritedNotes() = db.getNoteDao().getFavoritedNotes()
-    fun deleteNote(note: Note) = db.getNoteDao().deleteNote(note)
+    suspend fun deleteNote(note: Note) = withContext(Dispatchers.IO){
+        db.getNoteDao().deleteNote(note)
+    }
 }

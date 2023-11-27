@@ -35,5 +35,8 @@
         <argument
             android:name="note"
             app:argType="com.mynotes.models.Note" />
+        <action
+            android:id="@+id/action_noteFragment_to_localNotesFragment"
+            app:destination="@id/localNotesFragment" />
     </fragment>
 </navigation>

@@ -5,4 +5,6 @@
     <color name="my_text_note">#D1D1D1</color>
     <color name="my_light_primary">#2a0052</color>
     <color name="my_light_background">#51009d</color>
+    <color name="fab_not_favorite">#51009d</color>
+    <color name="fab_favorite">#2a0052</color>
 </resources>

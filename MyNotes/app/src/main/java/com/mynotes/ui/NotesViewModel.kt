@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.mynotes.models.Note
 import com.mynotes.repository.NotesRepository
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class NotesViewModel(
     val notesRepository: NotesRepository
@@ -16,8 +18,8 @@ class NotesViewModel(
     val searchNotes: LiveData<List<Note>>
         get() = _searchNotes
 
-    fun saveNote(note: Note) = viewModelScope.launch {
-        notesRepository.upsert(note)
+    suspend fun saveNote(note: Note):Long {
+        return notesRepository.upsert(note)
     }
     fun updateIsFavorited(noteId: Int, isFavorited: Boolean) = viewModelScope.launch {
         notesRepository.updateIsFavorited(noteId, isFavorited)
@@ -27,9 +29,19 @@ class NotesViewModel(
         _searchNotes.postValue(resposne)
 
     }
+
+    fun getIsFavoritedFromNoteById(noteID: Int) = notesRepository.getIsFavoritedFromNoteById(noteID)
+
     fun getSavedNotes() = notesRepository.getSavedNotes()
     fun getFavoritedNotes() = notesRepository.getFavoritedNotes()
     fun deleteNote(note: Note) = viewModelScope.launch {
         notesRepository.deleteNote(note)
+    }
+
+    fun getCurrentDate(): String {
+        val today: LocalDate = LocalDate.now()
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val formattedDate: String = today.format(formatter)
+        return formattedDate
     }
 }

@@ -1,20 +1,27 @@
 package com.mynotes.ui.fragments
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RelativeLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.mynotes.R
 import com.mynotes.ui.MainActivity
 import com.mynotes.ui.NotesViewModel
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -31,9 +38,9 @@ class NoteFragment: Fragment(R.layout.fragment_note) {
         val context = view.findViewById<EditText>(R.id.etContext)
         val save = view.findViewById<RelativeLayout>(R.id.bSaveNote)
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
-        val today: LocalDate = LocalDate.now()
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-        val formattedDate: String = today.format(formatter)
+        val goBack = view.findViewById<RelativeLayout>(R.id.bGoBack)
+        val deleteNote = view.findViewById<RelativeLayout>(R.id.bDeleteNote)
+
         title.setText(note.title)
         context.setText(note.content)
         title.addTextChangedListener {
@@ -43,11 +50,14 @@ class NoteFragment: Fragment(R.layout.fragment_note) {
             note.content = it.toString()
         }
         save.setOnClickListener {
-            hideKeyboard(view)
-            note.modificationDate = formattedDate
-            viewModel.saveNote(note)
-            Snackbar.make(view, "Note has been saved", Snackbar.LENGTH_SHORT).show()
+            lifecycleScope.launch {
+                hideKeyboard(view)
+                note.modificationDate = viewModel.getCurrentDate()
+                viewModel.saveNote(note)
+                Snackbar.make(view, "Note has been saved", Snackbar.LENGTH_SHORT).show()
+            }
         }
+
         fab.setOnClickListener {
             if(note.id != null) {
                 viewModel.updateIsFavorited(note.id!!, !note.isFavorited)
@@ -57,6 +67,29 @@ class NoteFragment: Fragment(R.layout.fragment_note) {
                     Snackbar.make(view, "Note added to favorited", Snackbar.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        note.id?.let {
+            viewModel.getIsFavoritedFromNoteById(it).observe(viewLifecycleOwner, Observer {isFavorited ->
+                if(isFavorited) {
+                    fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.fab_favorite))
+                } else {
+                    fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.fab_not_favorite))
+                }
+            })
+        }
+
+        deleteNote.setOnClickListener {
+            viewModel.deleteNote(note)
+            findNavController().navigate(
+                R.id.action_noteFragment_to_localNotesFragment
+            )
+        }
+
+        goBack.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_noteFragment_to_localNotesFragment
+            )
         }
     }
 
