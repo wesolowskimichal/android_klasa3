@@ -12,6 +12,6 @@ data class Note (
     var id: Int? = null,
     var title: String,
     var content: String,
-    val modificationDate: String,
+    var modificationDate: String,
     val isFavorited: Boolean
 ): Serializable

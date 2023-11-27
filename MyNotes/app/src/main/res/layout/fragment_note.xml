@@ -11,7 +11,6 @@
         android:id="@+id/etTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:padding="8dp"
         android:hint="Title"
         android:textColorHint="#999"
@@ -20,22 +19,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/white"
-        android:background="#2a0052" />
+        android:background="#2a0052"
+        android:maxLines="1"/>
 
-    <Button
+    <include layout="@layout/button_save_note"
         android:id="@+id/bSaveNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_note_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:gravity="top|start"
         android:id="@+id/etContext"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:padding="2dp"
         android:background="@drawable/ic_item_preview_cl_background"
         android:hint="Content"
