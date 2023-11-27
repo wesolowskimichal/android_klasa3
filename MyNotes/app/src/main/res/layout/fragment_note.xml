@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/my_light_background">
 
+    <include
+        android:id="@+id/bGoBack"
+        layout="@layout/button_go_back"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save_note_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etTitle"
@@ -16,7 +25,7 @@
         android:textColorHint="#999"
         app:layout_constraintEnd_toStartOf="@+id/bSaveNote"
         app:layout_constraintHorizontal_bias="0.151"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bGoBack"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/white"
         android:background="#2a0052"
@@ -28,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="@string/save_note_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:gravity="top|start"
@@ -42,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@id/etTitle"
         app:layout_constraintBottom_toTopOf="@+id/fab"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/goBack"
         android:textColor="@color/white"
         />
 

@@ -1,7 +1,9 @@
 package com.mynotes.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RelativeLayout
@@ -41,6 +43,7 @@ class NoteFragment: Fragment(R.layout.fragment_note) {
             note.content = it.toString()
         }
         save.setOnClickListener {
+            hideKeyboard(view)
             note.modificationDate = formattedDate
             viewModel.saveNote(note)
             Snackbar.make(view, "Note has been saved", Snackbar.LENGTH_SHORT).show()
@@ -55,5 +58,10 @@ class NoteFragment: Fragment(R.layout.fragment_note) {
                 }
             }
         }
+    }
+
+    private fun hideKeyboard(view: View) {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
