@@ -3,40 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/my_light_background">
 
 
     <EditText
         android:id="@+id/etTitle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Tytuł"
+        android:layout_marginTop="4dp"
+        android:padding="8dp"
+        android:hint="Title"
+        android:textColorHint="#999"
         app:layout_constraintEnd_toStartOf="@+id/bSaveNote"
         app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:background="#2a0052" />
 
     <Button
         android:id="@+id/bSaveNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/save_note_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:gravity="top|start"
         android:id="@+id/etContext"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:hint="Treść notatki"
+        android:padding="2dp"
+        android:background="@drawable/ic_item_preview_cl_background"
+        android:hint="Content"
+        android:textColorHint="#999"
         app:layout_constraintTop_toBottomOf="@id/etTitle"
         app:layout_constraintBottom_toTopOf="@+id/fab"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
